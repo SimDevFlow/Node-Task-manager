@@ -1,7 +1,12 @@
 import { Task } from "../models/Task.js"
 
-const getAllTasks = (req,res)=>{
-    res.send("All tasks")
+const getAllTasks = async(req,res)=>{
+    try {
+        const tasks = await Task.find({})
+        res.status(200).json({tasks})
+    } catch (error) {
+        res.status(500).json({msg:error})
+    }
 }
 const createTasks = async(req,res)=>{
     
